@@ -495,7 +495,7 @@ body{font-family:'Kanit','Sarabun','Leelawadee UI','Tahoma',sans-serif;backgroun
    PRODUCTION: set GAS_URL to your Google Apps Script Web App URL.
    The script will POST each record as JSON -> append to Google Sheet.
    Leave GAS_URL = "" to use localStorage (demo mode). */
-var GAS_URL = "https://script.google.com/macros/s/AKfycbzHmhHVovMzuqBp0fcv94Q3SS7ybDviFtdKZZfqJH7WgkcFmZs3ZoCGZgQih4pB28EgMw/exec";
+var GAS_URL = "https://script.google.com/macros/s/AKfycbzdKdee1ZZln-cP3fPh5Ig5MMzijSoASafM5LZB7r12Qi1qiYcmBYvgDSZ1l3imWXX2kQ/exec";
 var STORE_KEY='com7_halloween_2569';
 function getRecords(){try{return JSON.parse(localStorage.getItem(STORE_KEY)||'[]');}catch(e){return[];}}
 function saveLocal(rec){var r=getRecords();r.push(rec);localStorage.setItem(STORE_KEY,JSON.stringify(r));}
