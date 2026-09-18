@@ -502,9 +502,10 @@ function saveLocal(rec){var r=getRecords();r.push(rec);localStorage.setItem(STOR
 function saveRecord(rec){
   saveLocal(rec); /* local copy: dup-check + demo admin */
   if(!GAS_URL) return Promise.resolve({ok:true, local:true});
-  /* text/plain = simple request, ไม่ trigger CORS preflight ของ Apps Script */
-  return fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(rec)})
-    .then(function(res){ return res.ok ? res.text().then(function(t){return {ok:true, resp:t};}) : {ok:false, status:res.status}; })
+  /* no-cors: ส่งเข้า Apps Script ได้ชัวร์ (Apps Script ไม่ส่ง CORS header
+     จึงอ่าน response ไม่ได้ — ถือว่าสำเร็จเมื่อ fetch ไม่ throw) */
+  return fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(rec)})
+    .then(function(){ return {ok:true}; })
     .catch(function(err){ return {ok:false, error:String(err)}; });
 }
 var pdpaOn=false,pdpaCheck=document.getElementById('pdpaCheck');
